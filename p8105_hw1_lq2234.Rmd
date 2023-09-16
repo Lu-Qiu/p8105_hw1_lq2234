@@ -1,0 +1,39 @@
+---
+title: "p8105_hw1_lq2234"
+author: "Lu Qiu"
+date: "2023-09-16"
+output: html_document
+---
+
+### Problem 1
+
+Load the packages:
+```{r, echo=TRUE, message=FALSE}
+library(moderndive)
+library(ggplot2)
+```
+
+Load the `early_january_weather` dataset:
+
+```{r}
+data("early_january_weather")
+```
+Here is a short description of the dataset using inline R code:
+
+* This dataset contains `r ncol(early_january_weather)` variables, which are:  `r names(early_january_weather)`.  
+* This dataset has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.  
+* The mean temperature is: `r round(mean(early_january_weather$temp), digit =2)`.
+
+Make a scatterplot of `temp` (y) vs `time_hour` (x):
+
+```{r fig.height = 4, fig.width = 14}
+ggplot(early_january_weather, aes(x = time_hour, y = temp)) + geom_point(aes(colour=humid)) + scale_x_datetime(date_breaks = "1 day")
+```
+Patterns that are apparent in this plot:
+
+* The temperature shows an increasing trend from 2013-01-01 to 2013-01-15.  
+* Within a single day, the temperature is highest at noon and lower during the morning and night.
+
+
+
+
