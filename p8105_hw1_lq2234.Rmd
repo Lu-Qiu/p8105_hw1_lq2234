@@ -33,7 +33,15 @@ Patterns that are apparent in this plot:
 
 * The temperature shows an increasing trend from 2013-01-01 to 2013-01-15.  
 * Within a single day, the temperature is highest at noon and lower during the morning and night.
+* Within a single day, the humidity is highest at night.
+* The overall humidity is high from 2013-01-12 to 2013-01-15.
+
+Export the scatterplot to the project directory using ggsave:
+```{r fig.height = 4, fig.width = 14, message=FALSE}
+ggsave("temp_time_scatter.png")
+```
 
 
 
+### Problem 2
 
