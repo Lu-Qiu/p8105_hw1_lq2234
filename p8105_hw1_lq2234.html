@@ -412,16 +412,44 @@ df &lt;- data.frame(random_sample,
                  factor_vector)
 print(df)</code></pre>
 <pre><code>##    random_sample logical_vector character_vector factor_vector
-## 1      0.2039944           TRUE             Male             1
-## 2      0.1506377           TRUE           Female             2
-## 3      0.6363757           TRUE           Female             3
-## 4      0.4100599           TRUE             Male             1
-## 5     -0.6804192          FALSE           Female             2
-## 6      0.5900405           TRUE           Female             3
-## 7      1.5034511           TRUE             Male             1
-## 8      2.3945999           TRUE             Male             2
-## 9      0.7455862           TRUE             Male             3
-## 10     0.6553010           TRUE           Female             1</code></pre>
+## 1      1.1537559           TRUE             Male             1
+## 2     -0.9950992          FALSE           Female             2
+## 3     -0.7145535          FALSE           Female             3
+## 4      0.7808766           TRUE             Male             1
+## 5      0.2428656           TRUE           Female             2
+## 6      1.2270490           TRUE           Female             3
+## 7     -0.9271572          FALSE             Male             1
+## 8      0.9373546           TRUE             Male             2
+## 9     -0.4511839          FALSE             Male             3
+## 10    -0.4694879          FALSE           Female             1</code></pre>
+<p>The mean of the <code>random_sample</code> is 0.078442.<br />
+The mean of the <code>logical_vector</code> is 0.5.<br />
+The mean of the <code>character_vector</code> is NA.<br />
+The mean of the <code>factor_sample</code> is NA.</p>
+<p>The mean of <code>random_sample</code> and
+<code>logical_vector</code>can be calculated, while the mean of
+<code>character_vector</code> and <code>factor_sample</code> cannot be
+calculated.</p>
+<pre class="r"><code>as.numeric(pull(df,2))
+as.numeric(pull(df,3))
+as.numeric(pull(df,4))</code></pre>
+<p>What happens, and why?</p>
+<ul>
+<li>Applying as.numeric to a logical vector converts it to a numeric
+vector where TRUE becomes 1 and FALSE becomes 0. This conversion helps
+explain what happens when trying to take the mean. Because the mean of a
+numeric vector containing 0s and 1s makes sense, the logical vector is
+coerced to a numeric vector when using mean().</li>
+<li>Applying as.numeric to a character vector does not provide
+meaningful results because characters cannot be directly converted to
+numeric values. R converts each character to NA, and taking the mean of
+NA values will result in NA.<br />
+</li>
+<li>Applying as.numeric to a factor vector converts the factor levels to
+their underlying integer representation. Taking the mean of these
+integers does not have a meaningful interpretation, so the mean is also
+NA.</li>
+</ul>
 </div>
 
 

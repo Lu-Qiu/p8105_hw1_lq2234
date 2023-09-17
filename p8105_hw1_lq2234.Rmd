@@ -64,6 +64,24 @@ df <- data.frame(random_sample,
                  factor_vector)
 print(df)
 ```
+The mean of the `random_sample` is `r mean(pull(df,1))`.  
+The mean of the `logical_vector` is `r mean(pull(df,2))`.  
+The mean of the `character_vector` is `r mean(pull(df,3))`.  
+The mean of the `factor_sample` is `r mean(pull(df,4))`.
+
+The mean of `random_sample` and `logical_vector`can be calculated, while the mean of `character_vector` and `factor_sample` cannot be calculated.
+
+```{r, warning=FALSE, results='hide'}
+as.numeric(pull(df,2))
+as.numeric(pull(df,3))
+as.numeric(pull(df,4))
+```
+
+What happens, and why?
+
+* Applying as.numeric to a logical vector converts it to a numeric vector where TRUE becomes 1 and FALSE becomes 0. This conversion helps explain what happens when trying to take the mean. Because the mean of a numeric vector containing 0s and 1s makes sense, the logical vector is coerced to a numeric vector when using mean().
+* Applying as.numeric to a character vector does not provide meaningful results because characters cannot be directly converted to numeric values. R converts each character to NA, and taking the mean of NA values will result in NA.  
+* Applying as.numeric to a factor vector converts the factor levels to their underlying integer representation. Taking the mean of these integers does not have a meaningful interpretation, so the mean is also NA.
 
 
 
